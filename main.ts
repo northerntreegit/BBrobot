@@ -1,4 +1,6 @@
 //% weight=0 color=#FF8B27 icon="\uf1b9" block="RRrobotII"
+
+BBrobot.sendSoundNumber(0)
 //uf1b9
 namespace BBrobot {
     let event_src_ir = 12;
@@ -356,16 +358,16 @@ namespace BBrobot {
 
         if (bitNum == true) {
             pins.digitalWritePin(DigitalPin.P5, 1)
-            basic.pause(3)
+            basic.pause(30)
             pins.digitalWritePin(DigitalPin.P5, 0)
-            basic.pause(1)
+            basic.pause(10)
 
         }
         else {
             pins.digitalWritePin(DigitalPin.P5, 1)
-            basic.pause(1)
+            basic.pause(10)
             pins.digitalWritePin(DigitalPin.P5, 0)
-            basic.pause(3)
+            basic.pause(30)
         }
     }
 
@@ -374,7 +376,7 @@ namespace BBrobot {
     //% advanced=true
     export function sendSoundNumber(soundNumber: number) {
         pins.digitalWritePin(DigitalPin.P5, 0)
-        basic.pause(5)
+        basic.pause(50)
         for (let index = 0; index < 16; index++) {
             let bitBuf: boolean = true;
             if (bitBuf) {
