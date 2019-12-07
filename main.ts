@@ -350,4 +350,43 @@ namespace BBrobot {
             }
         }
     }
+
+
+    function sendSoundBit(bitNum: boolean) {
+
+        if (bitNum == true) {
+            pins.digitalWritePin(DigitalPin.P5, 1)
+            basic.pause(3)
+            pins.digitalWritePin(DigitalPin.P5, 0)
+            basic.pause(1)
+
+        }
+        else {
+            pins.digitalWritePin(DigitalPin.P5, 1)
+            basic.pause(1)
+            pins.digitalWritePin(DigitalPin.P5, 0)
+            basic.pause(3)
+        }
+    }
+
+    //% blockId="SND_NUM" block="Send Number %soundNumber Sound"
+    //% blockGap=5 weight=22
+    //% advanced=true
+    export function sendSoundNumber(soundNumber: number) {
+        pins.digitalWritePin(DigitalPin.P5, 0)
+        basic.pause(5)
+        for (let index = 0; index < 16; index++) {
+            let bitBuf: boolean = true;
+            if (bitBuf) {
+                sendSoundBit(true);
+            }
+            else {
+                sendSoundBit(false);
+            }
+
+        }
+
+    }
+
+
 }
