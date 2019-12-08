@@ -1,11 +1,14 @@
 //% weight=0 color=#FF8B27 icon="\uf1b9" block="RRrobotII"
 //uf1b9
 namespace BBrobot {
+    const I2C_OLED_ADDR = 0x78
+
     let event_src_ir = 12;
     let event_ir_sensor = 1;
     let Motor_R: boolean = false;
     let Motor_L: boolean = false;
     let Force: number = 10;
+
 
     function IR_sensorL(irdataL: number) {   //此為中斷觸發方塊
         control.inBackground(() => {
@@ -399,34 +402,17 @@ namespace BBrobot {
 
     }
 
+
+    function i2cOledWriteData(i2cData: number) {
+        let buf = pins.createBuffer(2);
+        buf[0] = 0x40;
+        buf[1] = i2cData;
+        pins.i2cWriteBuffer(I2C_OLED_ADDR, buf);
+    }
+    
     //% blockId="SHW_FACE" block="Show face %faceNumber"
     //% blockGap=5 weight=21
     //% advanced=true
     export function showFace(faceNumber: number) {
-        let bitBuf = [false, false, false, false, false, false, false, false];
-        let bitTool = 0b00000001;
-
-        pins.digitalWritePin(DigitalPin.P5, 0)
-
-        for (let index = 0; index < 8; index++) {
-            if (bitTool == (soundNumber & bitTool)) {
-                bitBuf[index] = true
-            }
-            bitTool = bitTool << 1;
-        }
-
-        control.waitMicros(6000)
-        for (let index = 0; index < 8; index++) {
-            if (bitBuf[index] == true) {
-                sendSoundBit(true);
-            }
-            else {
-                sendSoundBit(false);
-            }
-        }
-
-        pins.digitalWritePin(DigitalPin.P5, 1)
-
-    }
-
+        
 }
