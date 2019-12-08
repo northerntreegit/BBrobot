@@ -373,21 +373,21 @@ namespace BBrobot {
     //% blockGap=5 weight=22
     //% advanced=true
     export function sendSoundNumber(soundNumber: number) {
-        let bitBuf = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
-        let bitTool =0b0000000000000001;
+        let bitBuf = [false, false, false, false, false, false, false, false];
+        let bitTool = 0b00000001;
 
         pins.digitalWritePin(DigitalPin.P5, 0)
 
-        for (let index = 0; index < 16; index++) {
+        for (let index = 0; index < 8; index++) {
             if (bitTool == (soundNumber & bitTool)) {
                 bitBuf[index] = true
             }
-            bitTool = bitTool<<1;
+            bitTool = bitTool << 1;
         }
 
         control.waitMicros(6000)
-        for (let index = 0; index < 16; index++) {
-            if (bitBuf[index]==true) {
+        for (let index = 0; index < 8; index++) {
+            if (bitBuf[index] == true) {
                 sendSoundBit(true);
             }
             else {
@@ -396,6 +396,5 @@ namespace BBrobot {
         }
 
     }
-
 
 }
