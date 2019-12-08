@@ -387,8 +387,7 @@ namespace BBrobot {
 
         control.waitMicros(6000)
         for (let index = 0; index < 16; index++) {
-            let bitBuf: boolean = true;
-            if (bitBuf) {
+            if (bitBuf[index]==true) {
                 sendSoundBit(true);
             }
             else {
