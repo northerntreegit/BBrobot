@@ -394,6 +394,8 @@ namespace BBrobot {
                 sendSoundBit(false);
             }
         }
+        
+        pins.digitalWritePin(DigitalPin.P5, 1)
 
     }
 
