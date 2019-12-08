@@ -356,16 +356,16 @@ namespace BBrobot {
 
         if (bitNum == true) {
             pins.digitalWritePin(DigitalPin.P5, 1)
-            control.waitMicros(300)
+            control.waitMicros(3000)
             pins.digitalWritePin(DigitalPin.P5, 0)
-            control.waitMicros(100)
+            control.waitMicros(1000)
 
         }
         else {
             pins.digitalWritePin(DigitalPin.P5, 1)
-            control.waitMicros(100)
+            control.waitMicros(1000)
             pins.digitalWritePin(DigitalPin.P5, 0)
-            control.waitMicros(300)
+            control.waitMicros(3000)
         }
     }
 
@@ -374,7 +374,7 @@ namespace BBrobot {
     //% advanced=true
     export function sendSoundNumber(soundNumber: number) {
         pins.digitalWritePin(DigitalPin.P5, 0)
-        control.waitMicros(600)
+        control.waitMicros(6000)
         for (let index = 0; index < 16; index++) {
             let bitBuf: boolean = true;
             if (bitBuf) {
