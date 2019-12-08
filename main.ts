@@ -394,7 +394,37 @@ namespace BBrobot {
                 sendSoundBit(false);
             }
         }
-        
+
+        pins.digitalWritePin(DigitalPin.P5, 1)
+
+    }
+
+    //% blockId="SHW_FACE" block="Show face %faceNumber"
+    //% blockGap=5 weight=21
+    //% advanced=true
+    export function showFace(faceNumber: number) {
+        let bitBuf = [false, false, false, false, false, false, false, false];
+        let bitTool = 0b00000001;
+
+        pins.digitalWritePin(DigitalPin.P5, 0)
+
+        for (let index = 0; index < 8; index++) {
+            if (bitTool == (soundNumber & bitTool)) {
+                bitBuf[index] = true
+            }
+            bitTool = bitTool << 1;
+        }
+
+        control.waitMicros(6000)
+        for (let index = 0; index < 8; index++) {
+            if (bitBuf[index] == true) {
+                sendSoundBit(true);
+            }
+            else {
+                sendSoundBit(false);
+            }
+        }
+
         pins.digitalWritePin(DigitalPin.P5, 1)
 
     }
