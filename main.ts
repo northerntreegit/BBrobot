@@ -379,7 +379,7 @@ namespace BBrobot {
         pins.digitalWritePin(DigitalPin.P5, 0)
 
         for (let index = 0; index < 16; index++) {
-            if (soundNumber == (soundNumber & bitTool)) {
+            if (bitTool == (soundNumber & bitTool)) {
                 bitBuf[index] = true
             }
             bitTool = bitTool<<1;
