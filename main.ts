@@ -382,7 +382,7 @@ namespace BBrobot {
             if (soundNumber == (soundNumber & bitTool)) {
                 bitBuf[index] = true
             }
-            bitTool = bitTool>>1;
+            bitTool = bitTool<<1;
         }
 
         control.waitMicros(6000)
