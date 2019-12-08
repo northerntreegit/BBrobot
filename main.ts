@@ -414,5 +414,5 @@ namespace BBrobot {
     //% blockGap=5 weight=21
     //% advanced=true
     export function showFace(faceNumber: number) {
-        
+    }
 }
