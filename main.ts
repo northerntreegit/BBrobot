@@ -402,6 +402,12 @@ namespace BBrobot {
 
     }
 
+    function i2cOledWriteCmd(i2cCmd: number) {
+        let buf = pins.createBuffer(2);
+        buf[0] = 0x00;
+        buf[1] = i2cCmd;
+        pins.i2cWriteBuffer(I2C_OLED_ADDR, buf);
+    }
 
     function i2cOledWriteData(i2cData: number) {
         let buf = pins.createBuffer(2);
@@ -409,10 +415,45 @@ namespace BBrobot {
         buf[1] = i2cData;
         pins.i2cWriteBuffer(I2C_OLED_ADDR, buf);
     }
-    
+
+    function i2cOledInit() {
+        i2cOledWriteCmd(0xae)//--turn off oled panel
+        i2cOledWriteCmd(0x00)//---set low column address
+        i2cOledWriteCmd(0x10)//---set high column address
+        i2cOledWriteCmd(0x40)//--set start line address  Set Mapping RAM Display Start Line (0x00~0x3F)
+        i2cOledWriteCmd(0x81)//--set contrast control register
+        i2cOledWriteCmd(0xCF) // Set SEG Output Current Brightness
+        i2cOledWriteCmd(0xa1)//--Set SEG/Column Mapping     0xa0×óÓÒ·´ÖÃ 0xa1Õý³£
+        i2cOledWriteCmd(0xc8)//Set COM/Row Scan Direction   0xc0ÉÏÏÂ·´ÖÃ 0xc8Õý³£
+        i2cOledWriteCmd(0xa6)//--set normal display
+        i2cOledWriteCmd(0xa8)//--set multiplex ratio(1 to 64)
+        i2cOledWriteCmd(0x3f)//--1/64 duty
+        i2cOledWriteCmd(0xd3)//-set display offset	Shift Mapping RAM Counter (0x00~0x3F)
+        i2cOledWriteCmd(0x00)//-not offset
+        i2cOledWriteCmd(0xd5)//--set display clock divide ratio/oscillator frequency
+        i2cOledWriteCmd(0x80)//--set divide ratio, Set Clock as 100 Frames/Sec
+        i2cOledWriteCmd(0xd9)//--set pre-charge period
+        i2cOledWriteCmd(0xf1)//Set Pre-Charge as 15 Clocks & Discharge as 1 Clock
+        i2cOledWriteCmd(0xda)//--set com pins hardware configuration
+        i2cOledWriteCmd(0x12)
+        i2cOledWriteCmd(0xdb)//--set vcomh
+        i2cOledWriteCmd(0x40)//Set VCOM Deselect Level
+        i2cOledWriteCmd(0x20)//-Set Page Addressing Mode (0x00/0x01/0x02)
+        i2cOledWriteCmd(0x02)//
+        i2cOledWriteCmd(0x8d)//--set Charge Pump enable/disable
+        i2cOledWriteCmd(0x14)//--set(0x10) disable
+        i2cOledWriteCmd(0xa4)// Disable Entire Display On (0xa4/0xa5)
+        i2cOledWriteCmd(0xa6)// Disable Inverse Display On (0xa6/a7) 
+        i2cOledWriteCmd(0xaf)//--turn on oled panel
+
+
+
+    }
+
     //% blockId="SHW_FACE" block="Show face %faceNumber"
     //% blockGap=5 weight=21
     //% advanced=true
     export function showFace(faceNumber: number) {
-        
+
+    }
 }
